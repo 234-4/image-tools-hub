@@ -10,7 +10,1005 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼️</text></svg>">
+   <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼️</text></svg>">
+<style>
+    /* CSS Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Light theme colors */
+    --primary-color: #4361ee;
+    --primary-dark: #3a56d4;
+    --secondary-color: #7209b7;
+    --accent-color: #f72585;
+    --success-color: #4cc9f0;
+    --text-color: #333333;
+    --text-light: #666666;
+    --bg-color: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --border-color: #dee2e6;
+    --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    --card-shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.12);
+    --transition: all 0.3s ease;
+    --border-radius: 12px;
+    --border-radius-sm: 8px;
+    --font-family: 'Inter', sans-serif;
+    --font-family-heading: 'Poppins', sans-serif;
+}
+
+/* Dark theme colors */
+body.dark-mode {
+    --primary-color: #5a7dfe;
+    --primary-dark: #4361ee;
+    --secondary-color: #9d4edd;
+    --accent-color: #ff5d8f;
+    --success-color: #56cfe1;
+    --text-color: #f8f9fa;
+    --text-light: #adb5bd;
+    --bg-color: #121212;
+    --bg-secondary: #1e1e1e;
+    --bg-tertiary: #2d2d2d;
+    --border-color: #444444;
+    --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    --card-shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+    transition: var(--transition);
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    gap: 8px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+}
+
+.btn-secondary {
+    background-color: var(--bg-tertiary);
+    color: var(--text-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--border-color);
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #38b2d0;
+    transform: translateY(-2px);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+.theme-toggle .fa-sun {
+    display: none;
+}
+
+body.dark-mode .theme-toggle .fa-moon {
+    display: none;
+}
+
+body.dark-mode .theme-toggle .fa-sun {
+    display: block;
+}
+
+/* Navigation */
+.navbar {
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    transition: var(--transition);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-family-heading);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+.logo i {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+}
+
+.logo-subtitle {
+    font-size: 0.8rem;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 5px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-link {
+    font-weight: 500;
+    padding: 8px 0;
+    position: relative;
+    color: var(--text-light);
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-color);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-color) 100%);
+}
+
+.hero-section .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-title {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.highlight {
+    color: var(--primary-color);
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 2.5rem;
+}
+
+.hero-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--bg-tertiary);
+    padding: 10px 15px;
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+}
+
+.feature i {
+    color: var(--primary-color);
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.image-placeholder {
+    width: 400px;
+    height: 300px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 5rem;
+    box-shadow: var(--card-shadow);
+}
+
+.image-placeholder p {
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+/* Sections Common */
+section {
+    padding: 80px 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header h2 {
+    margin-bottom: 15px;
+}
+
+.section-header p {
+    max-width: 700px;
+    margin: 0 auto;
+    color: var(--text-light);
+}
+
+/* Tools Grid */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.tool-card {
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    text-align: center;
+}
+
+.tool-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--primary-color);
+}
+
+.tool-card.active {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+.tool-icon {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(67, 97, 238, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+}
+
+.tool-card h3 {
+    margin-bottom: 10px;
+}
+
+.tool-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* Tool Interface */
+.tool-interface-section {
+    background-color: var(--bg-secondary);
+}
+
+.tool-interface {
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--card-shadow);
+}
+
+.tool-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.tool-header h2 {
+    margin-bottom: 10px;
+}
+
+.tool-header p {
+    color: var(--text-light);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Upload Area */
+.upload-area {
+    margin-bottom: 30px;
+}
+
+.upload-container {
+    border: 2px dashed var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 50px 20px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.upload-container.drag-over {
+    border-color: var(--primary-color);
+    background-color: rgba(67, 97, 238, 0.05);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.upload-container h3 {
+    margin-bottom: 10px;
+}
+
+.upload-container p {
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+.file-info {
+    font-size: 0.9rem;
+    margin-top: 15px;
+    color: var(--text-light);
+}
+
+/* Preview Section */
+.preview-section {
+    margin-bottom: 30px;
+}
+
+.preview-container {
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    padding: 20px;
+}
+
+.image-preview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.before-preview, .after-preview {
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius-sm);
+    padding: 20px;
+    text-align: center;
+}
+
+.before-preview h4, .after-preview h4 {
+    margin-bottom: 15px;
+    color: var(--text-light);
+}
+
+.preview-placeholder {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    background-color: var(--bg-tertiary);
+    border-radius: var(--border-radius-sm);
+}
+
+.preview-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+canvas {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Tool Controls */
+.tool-controls {
+    margin-bottom: 30px;
+}
+
+.controls-container {
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius);
+    padding: 25px;
+}
+
+.no-tool-selected {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-light);
+}
+
+.no-tool-selected i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.control-group {
+    margin-bottom: 20px;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background-color: var(--bg-tertiary);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    cursor: pointer;
+}
+
+.range-value {
+    display: inline-block;
+    margin-left: 10px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.dimensions-control {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.dimensions-control input {
+    width: 100px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.aspect-ratio {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.aspect-ratio label {
+    margin-bottom: 0;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* About Section */
+.about-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-list {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+.about-list li {
+    margin-bottom: 15px;
+    padding-left: 30px;
+    position: relative;
+}
+
+.about-list li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.tech-used {
+    margin-top: 30px;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.tech-tag {
+    background-color: var(--bg-tertiary);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.about-visual {
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 6rem;
+    box-shadow: var(--card-shadow);
+}
+
+/* Contact Section */
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+.contact-methods {
+    margin: 25px 0;
+}
+
+.contact-method {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: var(--bg-secondary);
+    border-radius: var(--border-radius-sm);
+}
+
+.contact-method i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.contact-method h4 {
+    margin-bottom: 5px;
+}
+
+.contact-note {
+    background-color: rgba(67, 97, 238, 0.1);
+    padding: 20px;
+    border-radius: var(--border-radius-sm);
+    margin-top: 30px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.contact-form {
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--card-shadow);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+}
+
+.error-message {
+    color: #e63946;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    min-height: 20px;
+}
+
+.form-note {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: 15px;
+    font-style: italic;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--bg-secondary);
+    padding: 60px 0 30px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+.footer-logo p {
+    margin: 15px 0 20px;
+    color: var(--text-light);
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    width: 40px;
+    height: 40px;
+    background-color: var(--bg-tertiary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-3px);
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.footer-column h4 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column li {
+    margin-bottom: 12px;
+}
+
+.footer-column a {
+    color: var(--text-light);
+    transition: var(--transition);
+}
+
+.footer-column a:hover {
+    color: var(--primary-color);
+    padding-left: 5px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 500px;
+    box-shadow: var(--card-shadow-hover);
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: var(--transition);
+}
+
+.close-modal:hover {
+    color: var(--text-color);
+}
+
+.modal-body {
+    padding: 30px 25px;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 4rem;
+    color: var(--success-color);
+    margin-bottom: 20px;
+}
+
+.modal-footer {
+    padding: 20px 25px;
+    border-top: 1px solid var(--border-color);
+    text-align: right;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .hero-section .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hero-features {
+        justify-content: center;
+    }
+    
+    .about-content, .contact-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.7rem;
+    }
+    
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-color);
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        border-top: 1px solid var(--border-color);
+    }
+    
+    .nav-links.show {
+        display: flex;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .image-preview {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .dimensions-control {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 576px) {
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+    }
+    
+    .theme-toggle {
+        top: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+}
+</style>
+
 </head>
 <body>
     <!-- Theme toggle button -->
@@ -342,5 +1340,971 @@
     </div>
 
     <script src="script.js"></script>
+    // Main JavaScript for Image Tools Hub - Browser Edition
+
+// DOM Elements
+const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const navLinks = document.querySelector('.nav-links');
+const navLinksList = document.querySelectorAll('.nav-link');
+const toolsGrid = document.querySelector('.tools-grid');
+const toolTitle = document.getElementById('tool-title');
+const toolDescription = document.getElementById('tool-description');
+const fileInput = document.getElementById('file-input');
+const browseBtn = document.getElementById('browse-btn');
+const uploadArea = document.getElementById('upload-area');
+const uploadContainer = document.querySelector('.upload-container');
+const originalCanvas = document.getElementById('original-canvas');
+const processedCanvas = document.getElementById('processed-canvas');
+const originalPreview = document.querySelector('.before-preview .preview-placeholder');
+const processedPreview = document.querySelector('.after-preview .preview-placeholder');
+const controlsContainer = document.getElementById('controls-container');
+const processBtn = document.getElementById('process-btn');
+const resetBtn = document.getElementById('reset-btn');
+const downloadBtn = document.getElementById('download-btn');
+const contactForm = document.getElementById('contact-form');
+const currentYear = document.getElementById('current-year');
+const successModal = document.getElementById('success-modal');
+const modalMessage = document.getElementById('modal-message');
+const closeModalButtons = document.querySelectorAll('.close-modal');
+const footerToolLinks = document.querySelectorAll('[data-tool]');
+
+// Global Variables
+let currentTool = null;
+let originalImage = null;
+let processedImage = null;
+let canvasContext = null;
+let processedCanvasContext = null;
+let imageData = null;
+let currentFile = null;
+
+// Tool Definitions
+const tools = [
+    {
+        id: 'compress',
+        name: 'Compress Image',
+        icon: 'fas fa-compress-alt',
+        description: 'Reduce image file size while maintaining quality',
+        controls: [
+            {
+                type: 'range',
+                id: 'quality',
+                label: 'Quality',
+                min: 10,
+                max: 100,
+                value: 80,
+                unit: '%'
+            },
+            {
+                type: 'info',
+                text: 'Lower quality = smaller file size'
+            }
+        ]
+    },
+    {
+        id: 'resize',
+        name: 'Resize Image',
+        icon: 'fas fa-expand-alt',
+        description: 'Change image dimensions while maintaining aspect ratio',
+        controls: [
+            {
+                type: 'dimensions',
+                id: 'dimensions',
+                label: 'Dimensions',
+                width: 800,
+                height: 600,
+                maintainAspectRatio: true
+            },
+            {
+                type: 'select',
+                id: 'resize-method',
+                label: 'Resize Method',
+                options: [
+                    { value: 'bilinear', label: 'Bilinear (Default)' },
+                    { value: 'nearest', label: 'Nearest Neighbor' }
+                ],
+                value: 'bilinear'
+            }
+        ]
+    },
+    {
+        id: 'convert',
+        name: 'Convert Format',
+        icon: 'fas fa-exchange-alt',
+        description: 'Convert between JPG, PNG, and WEBP formats',
+        controls: [
+            {
+                type: 'select',
+                id: 'format',
+                label: 'Output Format',
+                options: [
+                    { value: 'jpeg', label: 'JPEG (JPG)' },
+                    { value: 'png', label: 'PNG' },
+                    { value: 'webp', label: 'WEBP' }
+                ],
+                value: 'jpeg'
+            },
+            {
+                type: 'range',
+                id: 'convert-quality',
+                label: 'Quality (for JPEG/WEBP)',
+                min: 10,
+                max: 100,
+                value: 80,
+                unit: '%'
+            }
+        ]
+    },
+    {
+        id: 'crop',
+        name: 'Crop Image',
+        icon: 'fas fa-crop',
+        description: 'Select and crop a portion of the image',
+        controls: [
+            {
+                type: 'dimensions',
+                id: 'crop-dimensions',
+                label: 'Crop Area',
+                width: 400,
+                height: 300,
+                maintainAspectRatio: false
+            },
+            {
+                type: 'info',
+                text: 'Click and drag on the original image to select crop area'
+            }
+        ]
+    },
+    {
+        id: 'rotate',
+        name: 'Rotate & Flip',
+        icon: 'fas fa-sync-alt',
+        description: 'Rotate, flip, and adjust image orientation',
+        controls: [
+            {
+                type: 'range',
+                id: 'rotation',
+                label: 'Rotation',
+                min: -180,
+                max: 180,
+                value: 0,
+                unit: '°'
+            },
+            {
+                type: 'checkbox-group',
+                id: 'flip',
+                label: 'Flip',
+                options: [
+                    { id: 'flip-horizontal', label: 'Horizontal', checked: false },
+                    { id: 'flip-vertical', label: 'Vertical', checked: false }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'filters',
+        name: 'Image Filters',
+        icon: 'fas fa-sliders-h',
+        description: 'Apply brightness, contrast, and other adjustments',
+        controls: [
+            {
+                type: 'range',
+                id: 'brightness',
+                label: 'Brightness',
+                min: -100,
+                max: 100,
+                value: 0,
+                unit: '%'
+            },
+            {
+                type: 'range',
+                id: 'contrast',
+                label: 'Contrast',
+                min: -100,
+                max: 100,
+                value: 0,
+                unit: '%'
+            },
+            {
+                type: 'range',
+                id: 'saturation',
+                label: 'Saturation',
+                min: -100,
+                max: 100,
+                value: 0,
+                unit: '%'
+            }
+        ]
+    }
+];
+
+// Initialize the application
+function init() {
+    // Set current year in footer
+    currentYear.textContent = new Date().getFullYear();
+    
+    // Initialize tool cards
+    renderToolCards();
+    
+    // Set up event listeners
+    setupEventListeners();
+    
+    // Initialize canvas contexts
+    canvasContext = originalCanvas.getContext('2d');
+    processedCanvasContext = processedCanvas.getContext('2d');
+    
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+    }
+}
+
+// Render tool cards
+function renderToolCards() {
+    toolsGrid.innerHTML = '';
+    
+    tools.forEach(tool => {
+        const toolCard = document.createElement('div');
+        toolCard.className = 'tool-card';
+        toolCard.dataset.tool = tool.id;
+        
+        toolCard.innerHTML = `
+            <div class="tool-icon">
+                <i class="${tool.icon}"></i>
+            </div>
+            <h3>${tool.name}</h3>
+            <p>${tool.description}</p>
+        `;
+        
+        toolsGrid.appendChild(toolCard);
+    });
+}
+
+// Set up event listeners
+function setupEventListeners() {
+    // Theme toggle
+    themeToggle.addEventListener('click', toggleTheme);
+    
+    // Mobile menu toggle
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+    });
+    
+    // Navigation link clicks
+    navLinksList.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            scrollToSection(targetId);
+            
+            // Update active nav link
+            navLinksList.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            
+            // Close mobile menu if open
+            navLinks.classList.remove('show');
+        });
+    });
+    
+    // Tool card clicks
+    toolsGrid.addEventListener('click', (e) => {
+        const toolCard = e.target.closest('.tool-card');
+        if (toolCard) {
+            const toolId = toolCard.dataset.tool;
+            selectTool(toolId);
+            
+            // Update active tool card
+            document.querySelectorAll('.tool-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            toolCard.classList.add('active');
+            
+            // Scroll to tool interface
+            scrollToSection('tools');
+        }
+    });
+    
+    // Footer tool links
+    footerToolLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const toolId = link.dataset.tool;
+            selectTool(toolId);
+            
+            // Update active tool card
+            document.querySelectorAll('.tool-card').forEach(card => {
+                card.classList.remove('active');
+                if (card.dataset.tool === toolId) {
+                    card.classList.add('active');
+                }
+            });
+            
+            // Scroll to tool interface
+            scrollToSection('tools');
+        });
+    });
+    
+    // File input
+    browseBtn.addEventListener('click', () => {
+        fileInput.click();
+    });
+    
+    fileInput.addEventListener('change', handleFileSelect);
+    
+    // Drag and drop
+    uploadContainer.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadContainer.classList.add('drag-over');
+    });
+    
+    uploadContainer.addEventListener('dragleave', () => {
+        uploadContainer.classList.remove('drag-over');
+    });
+    
+    uploadContainer.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadContainer.classList.remove('drag-over');
+        
+        if (e.dataTransfer.files.length) {
+            handleFile(e.dataTransfer.files[0]);
+        }
+    });
+    
+    // Upload area click
+    uploadContainer.addEventListener('click', () => {
+        fileInput.click();
+    });
+    
+    // Process button
+    processBtn.addEventListener('click', processImage);
+    
+    // Reset button
+    resetBtn.addEventListener('click', resetTool);
+    
+    // Download button
+    downloadBtn.addEventListener('click', downloadImage);
+    
+    // Contact form
+    contactForm.addEventListener('submit', handleContactForm);
+    
+    // Modal close buttons
+    closeModalButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            successModal.classList.remove('show');
+        });
+    });
+    
+    // Close modal when clicking outside
+    successModal.addEventListener('click', (e) => {
+        if (e.target === successModal) {
+            successModal.classList.remove('show');
+        }
+    });
+    
+    // Privacy and Terms links
+    document.getElementById('privacy-link').addEventListener('click', (e) => {
+        e.preventDefault();
+        showModal('Privacy Policy', 'Your privacy is important to us. All image processing happens locally in your browser. We do not collect, store, or transmit any of your image data.');
+    });
+    
+    document.getElementById('terms-link').addEventListener('click', (e) => {
+        e.preventDefault();
+        showModal('Terms of Use', 'Image Tools Hub is free to use for personal and commercial purposes. We are not responsible for any data loss. All processing happens client-side in your browser.');
+    });
+}
+
+// Toggle between light and dark theme
+function toggleTheme() {
+    body.classList.toggle('dark-mode');
+    
+    // Save theme preference
+    const isDarkMode = body.classList.contains('dark-mode');
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+}
+
+// Scroll to section smoothly
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// Select a tool
+function selectTool(toolId) {
+    currentTool = tools.find(tool => tool.id === toolId);
+    
+    if (!currentTool) return;
+    
+    // Update UI
+    toolTitle.textContent = currentTool.name;
+    toolDescription.textContent = currentTool.description;
+    
+    // Render controls
+    renderControls();
+    
+    // Enable/disable buttons based on image upload
+    updateButtonStates();
+}
+
+// Render tool controls
+function renderControls() {
+    controlsContainer.innerHTML = '';
+    
+    if (!currentTool) {
+        controlsContainer.innerHTML = `
+            <div class="no-tool-selected">
+                <i class="fas fa-tools"></i>
+                <p>Select a tool to see available settings</p>
+            </div>
+        `;
+        return;
+    }
+    
+    currentTool.controls.forEach(control => {
+        const controlGroup = document.createElement('div');
+        controlGroup.className = 'control-group';
+        
+        switch (control.type) {
+            case 'range':
+                controlGroup.innerHTML = `
+                    <label for="${control.id}">${control.label}</label>
+                    <div>
+                        <input type="range" id="${control.id}" 
+                               min="${control.min}" max="${control.max}" 
+                               value="${control.value}">
+                        <span class="range-value">${control.value}${control.unit || ''}</span>
+                    </div>
+                `;
+                
+                // Add event listener for range updates
+                setTimeout(() => {
+                    const rangeInput = document.getElementById(control.id);
+                    const rangeValue = controlGroup.querySelector('.range-value');
+                    
+                    rangeInput.addEventListener('input', () => {
+                        rangeValue.textContent = `${rangeInput.value}${control.unit || ''}`;
+                    });
+                }, 0);
+                break;
+                
+            case 'dimensions':
+                controlGroup.innerHTML = `
+                    <label for="${control.id}">${control.label}</label>
+                    <div class="dimensions-control">
+                        <div>
+                            <label for="${control.id}-width">Width</label>
+                            <input type="number" id="${control.id}-width" value="${control.width}" min="1">
+                        </div>
+                        <span>×</span>
+                        <div>
+                            <label for="${control.id}-height">Height</label>
+                            <input type="number" id="${control.id}-height" value="${control.height}" min="1">
+                        </div>
+                    </div>
+                    ${control.maintainAspectRatio ? `
+                    <div class="aspect-ratio">
+                        <input type="checkbox" id="${control.id}-lock" checked>
+                        <label for="${control.id}-lock">Maintain aspect ratio</label>
+                    </div>
+                    ` : ''}
+                `;
+                
+                // Add event listeners for dimension inputs
+                setTimeout(() => {
+                    const widthInput = document.getElementById(`${control.id}-width`);
+                    const heightInput = document.getElementById(`${control.id}-height`);
+                    const lockCheckbox = document.getElementById(`${control.id}-lock`);
+                    
+                    if (lockCheckbox) {
+                        let originalRatio = control.width / control.height;
+                        
+                        widthInput.addEventListener('input', () => {
+                            if (lockCheckbox.checked && originalImage) {
+                                heightInput.value = Math.round(widthInput.value / originalRatio);
+                            }
+                        });
+                        
+                        heightInput.addEventListener('input', () => {
+                            if (lockCheckbox.checked && originalImage) {
+                                widthInput.value = Math.round(heightInput.value * originalRatio);
+                            }
+                        });
+                    }
+                }, 0);
+                break;
+                
+            case 'select':
+                const options = control.options.map(option => 
+                    `<option value="${option.value}" ${option.value === control.value ? 'selected' : ''}>${option.label}</option>`
+                ).join('');
+                
+                controlGroup.innerHTML = `
+                    <label for="${control.id}">${control.label}</label>
+                    <select id="${control.id}">
+                        ${options}
+                    </select>
+                `;
+                break;
+                
+            case 'checkbox-group':
+                const checkboxes = control.options.map(option => 
+                    `<div>
+                        <input type="checkbox" id="${option.id}" ${option.checked ? 'checked' : ''}>
+                        <label for="${option.id}">${option.label}</label>
+                    </div>`
+                ).join('');
+                
+                controlGroup.innerHTML = `
+                    <label>${control.label}</label>
+                    <div>
+                        ${checkboxes}
+                    </div>
+                `;
+                break;
+                
+            case 'info':
+                controlGroup.innerHTML = `<p class="info-text">${control.text}</p>`;
+                controlGroup.classList.add('info-group');
+                break;
+        }
+        
+        controlsContainer.appendChild(controlGroup);
+    });
+}
+
+// Handle file selection
+function handleFileSelect(e) {
+    if (e.target.files.length) {
+        handleFile(e.target.files[0]);
+    }
+}
+
+// Handle file
+function handleFile(file) {
+    // Check file type
+    if (!file.type.match('image.*')) {
+        showModal('Invalid File', 'Please select an image file (JPG, PNG, GIF, WEBP).');
+        return;
+    }
+    
+    // Check file size (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+        showModal('File Too Large', 'Please select an image smaller than 10MB.');
+        return;
+    }
+    
+    currentFile = file;
+    
+    // Load image
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        originalImage = new Image();
+        originalImage.onload = () => {
+            // Display original image
+            displayImage(originalImage, originalCanvas, originalPreview);
+            
+            // Update button states
+            updateButtonStates();
+            
+            // If a tool is selected, process it immediately
+            if (currentTool) {
+                processImage();
+            }
+        };
+        originalImage.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+// Display image on canvas
+function displayImage(image, canvas, placeholder) {
+    // Calculate dimensions to fit preview
+    const maxWidth = 400;
+    const maxHeight = 300;
+    
+    let width = image.width;
+    let height = image.height;
+    
+    if (width > maxWidth) {
+        height = (maxWidth / width) * height;
+        width = maxWidth;
+    }
+    
+    if (height > maxHeight) {
+        width = (maxHeight / height) * width;
+        height = maxHeight;
+    }
+    
+    // Set canvas dimensions
+    canvas.width = width;
+    canvas.height = height;
+    
+    // Draw image on canvas
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(image, 0, 0, width, height);
+    
+    // Show canvas, hide placeholder
+    canvas.hidden = false;
+    placeholder.style.display = 'none';
+}
+
+// Update button states based on current state
+function updateButtonStates() {
+    const hasImage = originalImage !== null;
+    const hasTool = currentTool !== null;
+    
+    processBtn.disabled = !hasImage || !hasTool;
+    resetBtn.disabled = !hasImage;
+    downloadBtn.disabled = processedImage === null;
+}
+
+// Process image based on selected tool
+function processImage() {
+    if (!originalImage || !currentTool) return;
+    
+    // Create a copy of the original image for processing
+    processedImage = new Image();
+    processedImage.onload = () => {
+        // Process based on tool
+        let processedDataUrl;
+        
+        switch (currentTool.id) {
+            case 'compress':
+                processedDataUrl = compressImage();
+                break;
+            case 'resize':
+                processedDataUrl = resizeImage();
+                break;
+            case 'convert':
+                processedDataUrl = convertImage();
+                break;
+            case 'crop':
+                processedDataUrl = cropImage();
+                break;
+            case 'rotate':
+                processedDataUrl = rotateImage();
+                break;
+            case 'filters':
+                processedDataUrl = applyFilters();
+                break;
+            default:
+                processedDataUrl = originalImage.src;
+        }
+        
+        // Load processed image
+        const tempImage = new Image();
+        tempImage.onload = () => {
+            processedImage = tempImage;
+            displayImage(processedImage, processedCanvas, processedPreview);
+            updateButtonStates();
+            showModal('Success', `Image ${currentTool.name.toLowerCase()} successfully!`);
+        };
+        tempImage.src = processedDataUrl;
+    };
+    processedImage.src = originalImage.src;
+}
+
+// Compress image
+function compressImage() {
+    const quality = document.getElementById('quality').value / 100;
+    
+    // Create temporary canvas
+    const tempCanvas = document.createElement('canvas');
+    const tempCtx = tempCanvas.getContext('2d');
+    
+    tempCanvas.width = originalImage.width;
+    tempCanvas.height = originalImage.height;
+    tempCtx.drawImage(originalImage, 0, 0);
+    
+    // Convert to data URL with specified quality
+    return tempCanvas.toDataURL('image/jpeg', quality);
+}
+
+// Resize image
+function resizeImage() {
+    const width = parseInt(document.getElementById('dimensions-width').value);
+    const height = parseInt(document.getElementById('dimensions-height').value);
+    
+    // Create temporary canvas
+    const tempCanvas = document.createElement('canvas');
+    const tempCtx = tempCanvas.getContext('2d');
+    
+    tempCanvas.width = width;
+    tempCanvas.height = height;
+    
+    // Draw resized image
+    tempCtx.drawImage(originalImage, 0, 0, width, height);
+    
+    return tempCanvas.toDataURL();
+}
+
+// Convert image format
+function convertImage() {
+    const format = document.getElementById('format').value;
+    const quality = document.getElementById('convert-quality').value / 100;
+    
+    // Create temporary canvas
+    const tempCanvas = document.createElement('canvas');
+    const tempCtx = tempCanvas.getContext('2d');
+    
+    tempCanvas.width = originalImage.width;
+    tempCanvas.height = originalImage.height;
+    tempCtx.drawImage(originalImage, 0, 0);
+    
+    // Convert to selected format
+    let mimeType;
+    switch (format) {
+        case 'jpeg':
+            mimeType = 'image/jpeg';
+            break;
+        case 'png':
+            mimeType = 'image/png';
+            break;
+        case 'webp':
+            mimeType = 'image/webp';
+            break;
+        default:
+            mimeType = 'image/jpeg';
+    }
+    
+    return tempCanvas.toDataURL(mimeType, format === 'jpeg' || format === 'webp' ? quality : undefined);
+}
+
+// Crop image
+function cropImage() {
+    const width = parseInt(document.getElementById('crop-dimensions-width').value);
+    const height = parseInt(document.getElementById('crop-dimensions-height').value);
+    
+    // Calculate crop area (center crop)
+    const x = Math.max(0, (originalImage.width - width) / 2);
+    const y = Math.max(0, (originalImage.height - height) / 2);
+    
+    // Create temporary canvas
+    const tempCanvas = document.createElement('canvas');
+    const tempCtx = tempCanvas.getContext('2d');
+    
+    tempCanvas.width = width;
+    tempCanvas.height = height;
+    
+    // Draw cropped image
+    tempCtx.drawImage(
+        originalImage,
+        x, y, width, height, // Source rectangle
+        0, 0, width, height  // Destination rectangle
+    );
+    
+    return tempCanvas.toDataURL();
+}
+
+// Rotate and flip image
+function rotateImage() {
+    const rotation = parseInt(document.getElementById('rotation').value);
+    const flipHorizontal = document.getElementById('flip-horizontal')?.checked || false;
+    const flipVertical = document.getElementById('flip-vertical')?.checked || false;
+    
+    // Create temporary canvas
+    const tempCanvas = document.createElement('canvas');
+    const tempCtx = tempCanvas.getContext('2d');
+    
+    // Calculate new dimensions for rotation
+    let width = originalImage.width;
+    let height = originalImage.height;
+    
+    if (rotation % 180 !== 0) {
+        // Swap dimensions for 90° or 270° rotation
+        [width, height] = [height, width];
+    }
+    
+    tempCanvas.width = width;
+    tempCanvas.height = height;
+    
+    // Apply transformations
+    tempCtx.translate(width / 2, height / 2);
+    tempCtx.rotate(rotation * Math.PI / 180);
+    
+    // Apply flip
+    let scaleX = flipHorizontal ? -1 : 1;
+    let scaleY = flipVertical ? -1 : 1;
+    tempCtx.scale(scaleX, scaleY);
+    
+    // Draw image
+    tempCtx.drawImage(
+        originalImage,
+        -originalImage.width / 2,
+        -originalImage.height / 2
+    );
+    
+    return tempCanvas.toDataURL();
+}
+
+// Apply filters to image
+function applyFilters() {
+    const brightness = parseInt(document.getElementById('brightness').value);
+    const contrast = parseInt(document.getElementById('contrast').value);
+    const saturation = parseInt(document.getElementById('saturation').value);
+    
+    // Create temporary canvas
+    const tempCanvas = document.createElement('canvas');
+    const tempCtx = tempCanvas.getContext('2d');
+    
+    tempCanvas.width = originalImage.width;
+    tempCanvas.height = originalImage.height;
+    
+    // Draw original image
+    tempCtx.drawImage(originalImage, 0, 0);
+    
+    // Apply filters using CSS filters
+    let filter = '';
+    
+    if (brightness !== 0) {
+        filter += `brightness(${100 + brightness}%) `;
+    }
+    
+    if (contrast !== 0) {
+        filter += `contrast(${100 + contrast}%) `;
+    }
+    
+    if (saturation !== 0) {
+        filter += `saturate(${100 + saturation}%) `;
+    }
+    
+    // Apply filter
+    if (filter) {
+        tempCtx.filter = filter.trim();
+        tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+        tempCtx.drawImage(originalImage, 0, 0);
+    }
+    
+    return tempCanvas.toDataURL();
+}
+
+// Reset tool to initial state
+function resetTool() {
+    if (!originalImage) return;
+    
+    // Reset controls to default values
+    if (currentTool) {
+        renderControls();
+    }
+    
+    // Reset processed image to original
+    processedImage = null;
+    processedCanvas.hidden = true;
+    processedPreview.style.display = 'flex';
+    
+    updateButtonStates();
+}
+
+// Download processed image
+function downloadImage() {
+    if (!processedImage) return;
+    
+    // Create a link element
+    const link = document.createElement('a');
+    
+    // Determine file name and extension
+    let fileName = 'processed_image';
+    let extension = 'png';
+    
+    if (currentFile) {
+        fileName = currentFile.name.replace(/\.[^/.]+$/, "");
+    }
+    
+    if (currentTool?.id === 'convert') {
+        const format = document.getElementById('format')?.value || 'png';
+        extension = format === 'jpeg' ? 'jpg' : format;
+    } else if (currentFile) {
+        extension = currentFile.name.split('.').pop();
+    }
+    
+    // Set download attributes
+    link.download = `${fileName}_${currentTool?.id || 'processed'}.${extension}`;
+    link.href = processedImage.src;
+    
+    // Trigger download
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Handle contact form submission
+function handleContactForm(e) {
+    e.preventDefault();
+    
+    // Get form values
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    // Clear previous errors
+    clearFormErrors();
+    
+    // Validate form
+    let isValid = true;
+    
+    if (!name) {
+        showFormError('name', 'Name is required');
+        isValid = false;
+    }
+    
+    if (!email) {
+        showFormError('email', 'Email is required');
+        isValid = false;
+    } else if (!isValidEmail(email)) {
+        showFormError('email', 'Please enter a valid email address');
+        isValid = false;
+    }
+    
+    if (!message) {
+        showFormError('message', 'Message is required');
+        isValid = false;
+    }
+    
+    if (isValid) {
+        // In a real implementation, you would send the form data to a server
+        // For this demo, we'll just show a success message
+        showModal('Message Sent', 'Thank you for your message! In a real implementation, this would be sent to a server for processing.');
+        
+        // Reset form
+        contactForm.reset();
+    }
+}
+
+// Show form error
+function showFormError(fieldId, message) {
+    const errorElement = document.getElementById(`${fieldId}-error`);
+    if (errorElement) {
+        errorElement.textContent = message;
+    }
+}
+
+// Clear form errors
+function clearFormErrors() {
+    const errorElements = document.querySelectorAll('.error-message');
+    errorElements.forEach(element => {
+        element.textContent = '';
+    });
+}
+
+// Validate email
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Show modal with message
+function showModal(title, message) {
+    document.querySelector('.modal-header h3').textContent = title;
+    modalMessage.textContent = message;
+    successModal.classList.add('show');
+}
+
+// Initialize the app when DOM is loaded
+document.addEventListener('DOMContentLoaded', init);
 </body>
+
 </html>
